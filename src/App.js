@@ -3,14 +3,54 @@ import "./App.css";
 import EventList from "./EventList";
 import CitySearch from "./CitySearch";
 import NumberOfEvents from "./NumberOfEvents";
+import { getEvents, extractLocations } from "./api";
+import "./nprogress.css";
 
 class App extends Component {
+  state = {
+    events: [],
+    locations: [],
+    numberEvents: 32,
+  };
+
+  updateEvents = (location) => {
+    getEvents().then((events) => {
+      const locationEvents =
+        // if statement - has user clicked all
+        events.filter((event) => event.location === location);
+      this.setState({
+        events: locationEvents,
+      });
+    });
+  };
+
+  // load events when the app loads
+  componentDidMount() {
+    this.mounted = true;
+    getEvents().then((events) => {
+      if (this.mounted) {
+        this.setState({ events, locations: extractLocations(events) });
+      }
+    });
+  }
+
+  componentWillUnmount() {
+    this.mounted = false;
+  }
+
   render() {
     return (
       <div className='App'>
-        <CitySearch />
-        <EventList />
-        <NumberOfEvents />
+        <CitySearch
+          locations={this.state.locations}
+          updateEvents={this.updateEvents}
+        />
+        <p> Number of Events:</p>
+        <NumberOfEvents
+          numberEvents={this.state.numberEvents}
+          updateEvents={this.updateEvents}
+        />
+        <EventList events={this.state.events} />
       </div>
     );
   }

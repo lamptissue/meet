@@ -1,5 +1,6 @@
 endpoints:
   GET - https://xp0eqd30mj.execute-api.eu-central-1.amazonaws.com/dev/api/get-auth-url
   GET - https://xp0eqd30mj.execute-api.eu-central-1.amazonaws.com/dev/api/token/{code}
+  https://xp0eqd30mj.execute-api.eu-central-1.amazonaws.com/dev/api/get-events
 
   {"access_token":"ya29.a0Aa4xrXOo4bxwswhGEiTbH4Mxldk6vSqB3lr1UUy428Q8N6lLQGLgPUVT4X1Mzuayotrn59P4P8CNmthIvF8qod1_ud27yV6K9hu0rXObRCoq3T6XaCaHHCSedZXo7PRhKx2WbC2GiXGHnlf8PxjSH7GZ9YB7MgaCgYKATASARMSFQEjDvL9mWT1lWLpzB8PyeoMoM63fA0165","scope":"https://www.googleapis.com/auth/calendar.readonly","token_type":"Bearer","expiry_date":1667033869145}
