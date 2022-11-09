@@ -9,7 +9,7 @@ describe("<NumberOfEvents /> component", () => {
   });
 
   test("render text input", () => {
-    expect(NumberOfEventsWrapper.find(".NumberOfEvents")).toHaveLength(1);
+    expect(NumberOfEventsWrapper.find(".numberOfEvents")).toHaveLength(1);
   });
 
   test("render default number of events - 32", () => {
