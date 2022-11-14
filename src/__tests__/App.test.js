@@ -87,6 +87,6 @@ describe("<App /> integration", () => {
     NumberOfEventsWrapper.instance().handleInputChanged(test);
     await getEvents();
     expect(AppWrapper.state("events")).toEqual[mockData[0]];
-    AppWrapper.unmount;
+    AppWrapper.unmount();
   });
 });
