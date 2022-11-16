@@ -57,24 +57,21 @@ defineFeature(feature, (test) => {
     then,
   }) => {
     let AppWrapper;
-    given("the event details have been expanded", () => {
-      AppWrapper = mount(<App />);
+    given("the event details have been expanded", async () => {
+      AppWrapper = await mount(<App />);
       AppWrapper.update();
-      AppWrapper.find(".event .show-details .details-btn")
-        .at(0)
-        .simulate("click");
+      // console.log("button-- -- --", AppWrapper.debug());
+      AppWrapper.find(".show-details").at(0).simulate("click");
     });
 
     when("the user taps the event", () => {
       AppWrapper.update();
-      AppWrapper.find(".event .hide-details .details-btn")
-        .at(0)
-        .simulate("click");
+      AppWrapper.find(".hide-details").at(0).simulate("click");
     });
 
     then("the event will collapse hiding the details", () => {
       AppWrapper.update();
-      AppWrapper.find(".event .details").toHaveLength(0);
+      expect(AppWrapper.find(".event .details")).toHaveLength(0);
     });
   });
 });
