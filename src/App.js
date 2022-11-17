@@ -46,7 +46,6 @@ class App extends Component {
       });
     });
   };
-
   updateEventNum = (num) => {
     //  Add an if statement to update state based on location or number here
     if (num > 0) {
@@ -67,10 +66,8 @@ class App extends Component {
           locations={this.state.locations}
           updateEvents={this.updateEvents}
         />
-        <p> Number of Events:</p>
         <NumberOfEvents
           numberEvents={this.state.numberEvents}
-          // updateEvents={this.updateEvents}
           updateEventNum={this.updateEventNum}
         />
         <EventList events={this.state.numberEventsFilter} />

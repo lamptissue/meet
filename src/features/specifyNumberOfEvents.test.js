@@ -35,17 +35,15 @@ defineFeature(feature, (test) => {
     then,
   }) => {
     let AppWrapper;
-    given("events are shown", () => {
-      AppWrapper = mount(<App />);
+    given("events are shown", async () => {
+      AppWrapper = await mount(<App />);
     });
 
     when("user changed the amount of events shown", () => {
       AppWrapper.update();
-      AppWrapper.find(NumberOfEvents)
-        .find(".number-events")
-        .simulate("change", {
-          target: { value: 1 },
-        });
+      AppWrapper.find(".number-events").simulate("change", {
+        target: { value: 1 },
+      });
     });
 
     then("required number of events should be shown", () => {
