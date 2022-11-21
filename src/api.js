@@ -9,7 +9,14 @@ import NProgress from "nprogress";
  * It will also remove all duplicates by creating another new array using the spread operator and spreading a Set.
  * The Set will remove all duplicates from the array.
  */
-const checkToken = async (accessToken) => {
+
+export const extractLocations = (events) => {
+  var extractLocations = events.map((event) => event.location);
+  var locations = [...new Set(extractLocations)];
+  return locations;
+};
+
+export const checkToken = async (accessToken) => {
   const result = await fetch(
     `https://www.googleapis.com/oauth2/v1/tokeninfo?access_token=${accessToken}`
   )
@@ -18,6 +25,21 @@ const checkToken = async (accessToken) => {
 
   return result;
 };
+
+const removeQuery = () => {
+  if (window.history.pushState && window.location.pathname) {
+    var newurl =
+      window.location.protocol +
+      "//" +
+      window.location.host +
+      window.location.pathname;
+    window.history.pushState("", "", newurl);
+  } else {
+    newurl = window.location.protocol + "//" + window.location.host;
+    window.history.pushState("", "", newurl);
+  }
+};
+
 export const getEvents = async () => {
   NProgress.start();
 
@@ -25,6 +47,12 @@ export const getEvents = async () => {
     NProgress.done();
     return mockData;
   }
+  if (!navigator.onLine) {
+    const data = localStorage.getItem("lastEvents");
+    NProgress.done();
+    return data ? JSON.parse(data).events : [];
+  }
+  const token = await getAccessToken();
 
   if (token) {
     removeQuery();
@@ -41,22 +69,6 @@ export const getEvents = async () => {
     NProgress.done();
     return result.data.events;
   }
-  if (result.data) {
-    var locations = extractLocations(result.data.events);
-    localStorage.setItem("lastEvents", JSON.stringify(result.data));
-    localStorage.setItem("locations", JSON.stringify(locations));
-  }
-  if (!navigator.onLine) {
-    const data = localStorage.getItem("lastEvents");
-    NProgress.done();
-    return data ? JSON.parse(events).events : [];
-  }
-  const token = await getAccessToken();
-};
-export const extractLocations = (events) => {
-  var extractLocations = events.map((event) => event.location);
-  var locations = [...new Set(extractLocations)];
-  return locations;
 };
 
 export const getAccessToken = async () => {
@@ -77,19 +89,6 @@ export const getAccessToken = async () => {
     return code && getToken(code);
   }
   return accessToken;
-};
-const removeQuery = () => {
-  if (window.history.pushState && window.location.pathname) {
-    var newurl =
-      window.location.protocol +
-      "//" +
-      window.location.host +
-      window.location.pathname;
-    window.history.pushState("", "", newurl);
-  } else {
-    newurl = window.location.protocol + "//" + window.location.host;
-    window.history.pushState("", "", newurl);
-  }
 };
 const getToken = async (code) => {
   const encodeCode = encodeURIComponent(code);

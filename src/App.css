@@ -199,6 +199,10 @@ input[type="number"] {
   font-family: "Roboto";
 }
 
+.warningAlert {
+  height: 10px;
+}
+
 @media only screen and (min-width: 992px) {
   .data-vis-wrapper {
     flex-direction: row;

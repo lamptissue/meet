@@ -63,8 +63,10 @@ describe("<App /> integration", () => {
 
   test('get list of all events when user selects "See all cities"', async () => {
     const AppWrapper = mount(<App />);
-    const suggestionItems = AppWrapper.find(CitySearch).find(".suggestions li");
-    await suggestionItems.at(suggestionItems.length - 1).simulate("click");
+    const suggestionItems = await AppWrapper.find(CitySearch).find(
+      ".suggestions li"
+    );
+    suggestionItems.at(suggestionItems.length - 1).simulate("click");
     const allEvents = await getEvents();
     expect(AppWrapper.state("events")).toEqual[allEvents];
     AppWrapper.unmount();
@@ -83,10 +85,10 @@ describe("<App /> integration", () => {
   test("check to see if state changes when the input is updated in NumberOfEvents", async () => {
     const AppWrapper = mount(<App />);
     const test = { target: { value: 1 } };
-    const NumberOfEventsWrapper = AppWrapper.find(NumberOfEvents);
+    const NumberOfEventsWrapper = await AppWrapper.find(NumberOfEvents);
     NumberOfEventsWrapper.instance().handleInputChanged(test);
     await getEvents();
-    expect(AppWrapper.state("events")).toEqual[mockData[0]];
+    expect(AppWrapper.state("events")[0]).toEqual(mockData[0]);
     AppWrapper.unmount();
   });
 });

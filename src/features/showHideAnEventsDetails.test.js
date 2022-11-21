@@ -32,8 +32,8 @@ defineFeature(feature, (test) => {
     then,
   }) => {
     let AppWrapper;
-    given("the user has chosen a city", () => {
-      AppWrapper = mount(<App />);
+    given("the user has chosen a city", async () => {
+      AppWrapper = await mount(<App />);
       expect(AppWrapper.find(".event").hostNodes()).toHaveLength[
         mockData.length
       ];

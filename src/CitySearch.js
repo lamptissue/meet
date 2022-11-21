@@ -39,9 +39,16 @@ class CitySearch extends Component {
       });
     }
   };
+
+  hideSuggestions = () => {
+    this.setState({
+      showSuggestions: false,
+    });
+  };
+
   render() {
     return (
-      <div className='CitySearch'>
+      <div className='CitySearch' onBlur={this.hideSuggestions}>
         <InfoAlert text={this.state.infoText} />
         <input
           type='text'
@@ -52,16 +59,9 @@ class CitySearch extends Component {
             this.setState({ showSuggestions: true });
           }}
         />
-        {/* <ul
+        <ul
           className='suggestions'
           style={this.state.showSuggestions ? {} : { display: "none" }}
-        > */}
-        <ul
-          className={
-            this.state.showSuggestions
-              ? "suggestions showSuggestions"
-              : "display-none"
-          }
         >
           {this.state.suggestions.map((suggestion) => (
             <li

@@ -34,6 +34,7 @@ class NumberOfEvents extends Component {
           type='number'
           className='number-events'
           min='1'
+          placeholder='City'
           value={numberEvents}
           onChange={this.handleInputChanged}
         />
