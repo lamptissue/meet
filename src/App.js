@@ -40,7 +40,11 @@ class App extends Component {
     if ((code || isTokenValid) && this.mounted) {
       getEvents().then((events) => {
         if (this.mounted) {
-          this.setState({ events, locations: extractLocations(events) });
+          this.setState({
+            events,
+            locations: extractLocations(events),
+            numberEventsFilter: events.slice(0, 32),
+          });
         }
       });
     }
