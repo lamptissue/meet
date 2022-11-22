@@ -40,15 +40,9 @@ class CitySearch extends Component {
     }
   };
 
-  hideSuggestions = () => {
-    this.setState({
-      showSuggestions: false,
-    });
-  };
-
   render() {
     return (
-      <div className='CitySearch' onBlur={this.hideSuggestions}>
+      <div className='CitySearch'>
         <InfoAlert text={this.state.infoText} />
         <input
           type='text'
