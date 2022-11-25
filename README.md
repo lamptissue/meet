@@ -5,10 +5,12 @@
 
 This app provides information for upcoming events in any given city chosen by the user. The user can specify how many events are shown, show data for the chosen area and it is available both online and offline (PWA).
 
-Take a closer look [demo](https://lamptissue.github.io/meet/)
+Take a closer look - [demo](https://lamptissue.github.io/meet/).
 
 Gmail account is required to use the app.
 Please note that ad-blockers may affect the functionality of the app.
+
+<img width="1512" alt="Screenshot 2022-11-25 at 10 53 41 am" src="https://user-images.githubusercontent.com/79291013/203968891-02f932fe-dd5e-4574-a19d-206176f22c92.png">
 
 # Technical requirements
 
