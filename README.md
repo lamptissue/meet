@@ -10,7 +10,7 @@ Take a closer look - [demo](https://lamptissue.github.io/meet/).
 Gmail account is required to use the app.
 Please note that ad-blockers may affect the functionality of the app.
 
-<img width="1512" alt="Screenshot 2022-11-25 at 10 53 41 am" src="https://user-images.githubusercontent.com/79291013/203968891-02f932fe-dd5e-4574-a19d-206176f22c92.png">
+<img width="1512" alt="Screenshot 2022-11-25 at 10 53 41 am" src="https://user-images.githubusercontent.com/79291013/203969705-9f7e5ce0-a5d0-43c0-94b1-5a19abecc462.png">
 
 # Technical requirements
 
@@ -19,6 +19,7 @@ Please note that ad-blockers may affect the functionality of the app.
 - Javascript
 - Jest/Enzyne
 - Puppeteer
+
 - AWS
 
 # Feature 1:
