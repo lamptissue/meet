@@ -7,10 +7,12 @@ This app provides information for upcoming events in any given city chosen by th
 
 Take a closer look - [demo](https://lamptissue.github.io/meet/).
 
-Gmail account is required to use the app.
-Please note that ad-blockers may affect the functionality of the app.
 
 <img width="1512" alt="Screenshot 2022-11-25 at 10 53 41 am" src="https://user-images.githubusercontent.com/79291013/203969705-9f7e5ce0-a5d0-43c0-94b1-5a19abecc462.png">
+
+
+<sub> Gmail account is required to use the app. <br/>
+Please note that ad-blockers may affect the functionality of the app. </sub>
 
 # Technical requirements
 
