@@ -24,6 +24,14 @@ p {
   display: block;
 }
 
+.nearCity {
+  margin: 0;
+}
+
+.cityevents {
+  margin-top: -28px;
+}
+
 input[type="text"],
 input[type="number"] {
   padding: 8px 6px 8px 10px;

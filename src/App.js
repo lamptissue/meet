@@ -25,6 +25,7 @@ class App extends Component {
     numberEvents: 32,
     numberEventsFilter: [],
     showWelcomeScreen: undefined,
+    locationFilteredEvents: [],
   };
   async componentDidMount() {
     this.mounted = true;
@@ -33,6 +34,7 @@ class App extends Component {
     const searchParams = new URLSearchParams(window.location.search);
     const code = searchParams.get("code");
     this.setState({ showWelcomeScreen: !(code || isTokenValid) });
+
     if ((code || isTokenValid) && this.mounted) {
       getEvents().then((events) => {
         if (this.mounted) {
@@ -50,36 +52,47 @@ class App extends Component {
     this.mounted = false;
   }
 
-  updateEvents = (location, eventCount) => {
-    getEvents().then((events) => {
-      const locationEvents = events.filter(
-        (event) => event.location === location
-      );
-      this.setState({
-        events: eventCount ? events : locationEvents,
-        numberEventsFilter:
-          this.state.numberEvents === 0
-            ? events.slice(0, 32)
-            : events.slice(0, this.state.numberEvents),
-      });
+  numFilter = (events, num) => {
+    if (num === 0) {
+      return events.slice(0, 32);
+    }
+    return events.slice(0, num);
+  };
+
+  updateEvents = (location) => {
+    const locationEvents =
+      location === "all"
+        ? this.state.events
+        : this.state.events.filter((event) => event.location === location);
+    this.setState({
+      locationFilteredEvents: locationEvents,
+      numberEventsFilter: this.numFilter(
+        locationEvents,
+        this.state.numberEvents
+      ),
     });
   };
   updateEventNum = (num) => {
-    //  Add an if statement to update state based on location or number here
-    if (num > 0) {
+    if (this.state.locationFilteredEvents.length !== 0) {
       this.setState({
-        eventsToShow: num,
-        numberEventsFilter:
-          this.state.numberEvents === 0
-            ? this.state.events.slice(0, 32)
-            : this.state.events.slice(0, num),
+        numberEvents: num,
+        numberEventsFilter: this.numFilter(
+          this.state.locationFilteredEvents,
+          num
+        ),
+      });
+    } else {
+      this.setState({
+        numberEvents: num,
+        numberEventsFilter: this.numFilter(this.state.events, num),
       });
     }
   };
+
   getData = () => {
-    const { locations, events } = this.state;
+    const { locations, numberEventsFilter } = this.state;
     const data = locations.map((location) => {
-      const number = events.filter(
+      const number = numberEventsFilter.filter(
         (event) => event.location === location
       ).length;
       const city = location.split(", ").shift();
@@ -89,7 +102,7 @@ class App extends Component {
   };
 
   render() {
-    const { events } = this.state;
+    const { locations, numberEvents, numberEventsFilter } = this.state;
     if (this.state.showWelcomeScreen === undefined)
       return <div className='App' />;
     return (
@@ -99,16 +112,17 @@ class App extends Component {
             <WarningAlert text='You are currently offline. The results you see may not be up to date' />
           )}
         </div>
-        <CitySearch
-          locations={this.state.locations}
-          updateEvents={this.updateEvents}
-        />
+        <h1>Meet App</h1>
+        <h3 className='nearCity'>Choose your nearest city</h3>
+        <CitySearch locations={locations} updateEvents={this.updateEvents} />
         <NumberOfEvents
-          numberEvents={this.state.numberEvents}
+          numberEvents={numberEvents}
           updateEventNum={this.updateEventNum}
         />
+        <h4 className='cityevents'>Events in each city</h4>
+
         <div className='data-vis-wrapper'>
-          <EventGenre events={events} />
+          <EventGenre events={numberEventsFilter} />
           <ResponsiveContainer height={400}>
             <ScatterChart margin={{ top: 20, right: 20, bottom: 20, left: 20 }}>
               <CartesianGrid />
@@ -124,7 +138,8 @@ class App extends Component {
             </ScatterChart>
           </ResponsiveContainer>
         </div>
-        <EventList events={this.state.numberEventsFilter} />
+        <EventList events={numberEventsFilter} />
+
         <WelcomeScreen
           showWelcomeScreen={this.state.showWelcomeScreen}
           getAccessToken={() => {
