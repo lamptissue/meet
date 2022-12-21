@@ -1,4 +1,3 @@
-
 # Meet - App
 
 # App overview
@@ -21,7 +20,6 @@ Please note that ad-blockers may affect the functionality of the app. </sub>
 - Javascript
 - Jest/Enzyne
 - Puppeteer
-
 - AWS
 
 # Feature 1:
