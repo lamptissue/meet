@@ -2,7 +2,7 @@
 
 # App overview
 
-This app provides information for upcoming events in any given city chosen by the user. The user can specify how many events are shown, show data for the chosen area and it is available both online and offline (PWA).
+  Meet App helps users stay informed about upcoming events in their desired city. They can choose the number of events to display and view data for their chosen location. The app is also accessible both online and offline as a progressive web app (PWA).
 
 Take a closer look - [demo](https://lamptissue.github.io/meet/).
 
