@@ -110,7 +110,7 @@ As a user, I should be able to use the app when offline so that I can see the ev
 
 # Data visualization
 
-As a user, I should be able to see a chart showing the upcoming events in each city so that I know what events are organized in which city.
+As a user, I should be able to see a chart showing the upcoming events in each city so that I know what events are organised in which city.
 
 ## Scenario 1: Show a chart with the number of upcoming events in each city
 
